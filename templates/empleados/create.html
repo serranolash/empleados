@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Empleado</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    <h1>Crear Empleado</h1>
+    <form action="{{ url_for('storage') }}" method="POST" enctype="multipart/form-data">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" required>
+        <br><br>
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" name="email" id="email" required>
+        <br><br>
+        <label for="foto">Foto:</label>
+        <input type="file" name="foto" id="foto" accept="image/*" required>
+        <br><br>
+        <input type="submit" value="Crear">
+    </form>
+</body>
+</html>
+{% include 'footer.html' %}

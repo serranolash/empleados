@@ -1,0 +1,31 @@
+{% include 'header.html' %}
+<h1>Editar Empleado</h1>
+
+<form method="post" action="/update" enctype="multipart/form-data">
+
+  {% if empleados %}
+  <input type="hidden" value="{{ empleados[0][0] if empleados[0] else '' }}" name="ID" id="txtID">
+
+  {% endif %}
+
+  <label for="nombre">Nombre:</label>
+  {% if empleados %}
+    <input type="text" id="nombre" name="nombre" value="{{ empleados[0][1] if empleados[0] else '' }}" required><br>
+  {% endif %}
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" value="{{ empleados[0][2] }}" required><br>
+
+  <label for="departamento_id">ID del departamento:</label>
+  <input type="text" id="departamento_id" name="departamento_id" value="{{ empleados[0][4] }}" required><br>
+
+  <label for="foto">Foto de perfil:</label>
+  <br/>
+  <img class="img-thumbnail" width="100" src="{{ url_for('uploads', nombreFoto=empleados[0][3]) }}" alt="">
+  <br/>
+  <br/>
+  <input type="file" name="foto" id="txtFoto">
+  <br/>
+  <button type="submit">Actualizar</button>
+</form>
+{% include 'footer.html' %}

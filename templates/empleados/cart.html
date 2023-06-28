@@ -1,0 +1,33 @@
+{% include 'header.html' %}
+<h1>Cart</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Foto</th>
+            <th>Departamento</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for empleado in empleados_departamentos %}
+        <tr>
+            <td>{{ empleado[0] }}</td>
+            <td>{{ empleado[1] }}</td>
+            <td>{{ empleado[2] }}</td>
+            <td><img class="img-thumbnail" src="uploads/{{ empleado[3] }}" alt="Foto de perfil" width="100"></td>
+            <td>{{ empleado[5] }}</td>  <!-- Modificación realizada aquí -->
+            <td>
+                <form action="/cart" method="POST" style="display:inline;">
+                    <input type="hidden" name="empleado_id" value="{{ empleado[0] }}">
+                    <input type="hidden" name="accion" value="eliminar">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar departamento</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include 'footer.html' %}

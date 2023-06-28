@@ -1,0 +1,47 @@
+{% include 'header.html' %}
+<h1>Lista de Empleados</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Foto</th>
+            <th>Departamento</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for empleado in empleados %}
+        <tr>
+            <td>{{ empleado[0] }}</td>
+            <td>{{ empleado[1] }}</td>
+            <td>{{ empleado[2] }}</td>
+            <td><img class="img-thumbnail" src="uploads/{{ empleado[3] }}" alt="Foto de perfil" width="100"></td>
+            <td>
+                <form action="/update" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="ID" value="{{ empleado[0] }}">
+                    <input type="hidden" name="nombre" value="{{ empleado[1] }}">
+                    <input type="hidden" name="email" value="{{ empleado[2] }}">
+                    <input type="hidden" name="foto" value="{{ empleado[3] }}">
+                    <select name="departamento_id" class="form-control">
+                        <option value="">Seleccione un departamento</option>
+                        {% for departamento in departamentos %}
+                            <option value="{{ departamento[0] }}">{{ departamento[1] }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary">Asignar</button>
+                </form>
+                
+                              
+                
+            </td>
+            <td>
+                <a href="/edit/{{ empleado[0] }}">Editar</a> |  
+                <a href="/destroy/{{ empleado[0] }}">Eliminar</a>                  
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include 'footer.html' %}
